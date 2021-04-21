@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: service-order
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/shop?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 8.129.230.41:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8080   #指定控制台服务的端口
+        port: 9999  #跟控制台交流的端口

@@ -1,0 +1,8 @@
+server:
+  port: 10001
+  servlet:
+    context-path: /file-system
+
+spring:
+  profiles:
+    active: ali

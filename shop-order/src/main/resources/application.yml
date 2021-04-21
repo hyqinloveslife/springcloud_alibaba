@@ -1,0 +1,9 @@
+server:
+  port: 8091
+  servlet:
+    context-path: /shop-order
+spring:
+  application:
+    name: service-order
+  profiles:
+    active: dev

@@ -1,0 +1,42 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: file-system    # 路由的唯一标识
+          uri: http://localhost:10001   # # 如果断言成功，将要转发去的地址
+          order: 0
+          predicates:                   ## # 断言，满足所有断言，才会进行转发
+            - Path=/file-system/**
+        - id: shop-comment
+          uri: http://localhost:9998
+          order: 0
+          predicates:
+            - Path=/shop-comment/**
+          filters:
+            - name: Hystrix
+              args:
+                name: fallbackCmdA
+                fallbackUri: forward:/fallback
+    circuitbreaker:
+      hystrix:
+        enabled: true
+  application:
+    name: shop-gateway
+server:
+  port: 9000
+
+## 配置的熔断超时时间
+#hystrix:
+#  command.fallbackCmdA.execution.isolation.thread.timeoutInMilliseconds: 1
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000
+    fallbackCmdA:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000

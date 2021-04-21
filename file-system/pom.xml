@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>springcloud-alibaba</artifactId>
+    <groupId>com.hyqin</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>file-system</artifactId>
+
+  <properties>
+    <mybatisplus.version>3.0.7.1</mybatisplus.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!--fastdfs的客户端工具-->
+    <dependency>
+      <groupId>com.taoyuanx</groupId>
+      <artifactId>fastdfs-client-java</artifactId>
+      <version>1.29-RELEASE</version>
+    </dependency>
+
+    <!--引入公共包-->
+    <dependency>
+      <groupId>com.hyqin</groupId>
+      <artifactId>shop-common</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+    <!--引入测试包-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+<!--    &lt;!&ndash;集成swagger2&ndash;&gt;-->
+<!--    <dependency>-->
+<!--      <groupId>io.springfox</groupId>-->
+<!--      <artifactId>springfox-swagger2</artifactId>-->
+<!--      <version>2.4.0</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>io.springfox</groupId>-->
+<!--      <artifactId>springfox-swagger-ui</artifactId>-->
+<!--      <version>2.4.0</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>com.github.xiaoymin</groupId>-->
+<!--      <artifactId>swagger-bootstrap-ui</artifactId>-->
+<!--      <version>1.9.6</version>-->
+<!--    </dependency>-->
+
+    <!--整合Knife4j-->
+    <dependency>
+      <groupId>com.github.xiaoymin</groupId>
+      <!--在引用时请在maven中央仓库搜索最新版本号-->
+      <artifactId>knife4j-spring-boot-starter</artifactId>
+      <version>2.0.4</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-boot-starter</artifactId>
+      <version>${mybatisplus.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus</artifactId>
+      <version>${mybatisplus.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-generator</artifactId>
+      <version>${mybatisplus.version}</version>
+    </dependency>
+
+  </dependencies>
+
+</project>

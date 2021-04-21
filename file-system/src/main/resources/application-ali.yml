@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: service-order
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/shop?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+# 开启swagger文档
+swagger2:
+  enable: true
+
+fdfs:
+  url: http://8.129.230.41
+  port: 8089
+  group: group1
+  local-temp-path: D:\\Docker\\upload\\
+
