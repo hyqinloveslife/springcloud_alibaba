@@ -1,48 +1,43 @@
 package com.hyqin.auth;
 
 import cn.dev33.satoken.stp.StpInterface;
-import java.util.ArrayList;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.hyqin.dao.MenuMapper;
+import com.hyqin.dao.PermissionMapper;
+import com.hyqin.entity.MenuInfoDO;
+import com.hyqin.entity.PermissionDO;
 import java.util.List;
+import java.util.stream.Collectors;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 /**
- * @description 获取当前账号权限码集合
+ * @description 自定义权限验证接口扩展
  * @author: huangyeqin
  * @create : 2021/3/10  21:15
  */
-@Component
+@Component    // 保证此类被SpringBoot扫描，完成sa-token的自定义权限验证扩展
 public class StpInterfaceImpl implements StpInterface {
 
-  /**
-   * 返回一个账号所拥有的权限码集合
-   * @Desc :
-   * @Author : huangyeqin
-   * @Date : 2021/3/10 21:16
-   * @Param : loginId 登录id
-              loginKey
-   * @Result : java.util.List<java.lang.String>
-  */
+  @Resource
+  private PermissionMapper permissionMapper;
+
+  @Resource
+  private MenuMapper menuMapper;
+
+  @Override
   public List<String> getPermissionList(Object loginId, String loginKey) {
-    // 返回权限集合
-    List<String> list = new ArrayList<String>();
-
-
-    return list;
+    List<MenuInfoDO> list = menuMapper
+        .selectList(new QueryWrapper<MenuInfoDO>().lambda().eq(MenuInfoDO::getMenuType,
+            "2"));
+    List<String> collect = list.stream().map(e -> e.getMenuPath()).collect(Collectors.toList());
+    return collect;
   }
 
-  /**
-   *
-   * @Desc : 返回一个账号所拥有的角色标识集合 (权限与角色可分开校验)
-   * @Author : huangyeqin
-   * @Date : 2021/3/10 21:18
-   * @Param : loginId
-              loginKey
-   * @Result : java.util.List<java.lang.String>
-  */
+  @Override
   public List<String> getRoleList(Object loginId, String loginKey) {
-    List<String> list = new ArrayList<String>();
-
-
-    return list;
+    List<PermissionDO> list = permissionMapper.selectList(null);
+    List<String> collect = list.stream().map(e -> e.getName()).collect(Collectors.toList());
+    return collect;
   }
 }

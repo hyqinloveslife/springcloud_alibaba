@@ -7,7 +7,7 @@ spring:
     name: service-user
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/shop?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/ucp?useUnicode=true&characterEncoding=utf-8
     username: root
     password: 123456
 
@@ -42,10 +42,8 @@ spring:
         ## 连接池中最小空闲链接
         min-idle: 0
 
-  jpa:
-    properties:
-      hibernate:
-        hbm2ddl:
-          auto: update
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
+## 配置控制台打印SQL日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

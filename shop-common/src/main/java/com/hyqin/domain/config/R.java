@@ -1,5 +1,6 @@
 package com.hyqin.domain.config;
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import java.io.Serializable;
 import lombok.Data;
 
@@ -63,6 +64,15 @@ public class R<T> implements Serializable {
   public static <T> R<T> success(String message, T data) {
     message = message != null && message.length() > 0 ? message : MSG_SUCCESS;
     return new R(SUCCESS, ResponseType.TYPE_SUCCESS.getType(), message, data);
+  }
+
+  public static <T> R<T> error(T data){
+    return new R(FAIL,ResponseType.TYPE_ERROR.getType(),MSG_FAIL,data);
+  }
+
+  public static <T> R<T> error(String message,T data){
+    message = message != null && message.length() > 0 ? message : MSG_FAIL;
+    return new R(FAIL, ResponseType.TYPE_ERROR.getType(), message, data);
   }
 
   public static enum ResponseType {
