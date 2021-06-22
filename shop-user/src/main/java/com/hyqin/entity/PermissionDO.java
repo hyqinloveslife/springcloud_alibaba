@@ -21,6 +21,6 @@ public class PermissionDO {
   @TableField(value = "name", updateStrategy = FieldStrategy.NOT_EMPTY)
   private String name;
 
-  @TableField(value = "desc", updateStrategy = FieldStrategy.NOT_EMPTY)
-  private String desc;
+  @TableField(value = "descriptions", updateStrategy = FieldStrategy.NOT_EMPTY)
+  private String descriptions;
 }

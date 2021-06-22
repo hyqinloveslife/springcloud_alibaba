@@ -17,6 +17,11 @@ spring:
               args:
                 name: fallbackCmdA
                 fallbackUri: forward:/fallback
+        - id: user
+          uri: http://localhost:8001
+          order: 0
+          predicates:
+            - Path=/user/**
     circuitbreaker:
       hystrix:
         enabled: true

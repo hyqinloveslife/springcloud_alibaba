@@ -7,6 +7,7 @@ import com.hyqin.domain.config.R;
 import com.hyqin.entity.UserDO;
 import com.hyqin.service.IUserService;
 import com.hyqin.vo.UserVo;
+import java.util.Collections;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,18 @@ public class UserServiceImpl implements IUserService {
         userVo.getPassword());
     List<UserDO> users = userMapper.selectList(queryWrapper);
     return users;
+  }
+
+  @Override
+  public R<UserDO> getUserInfo() {
+
+    // 写一个临时的返回内容
+    return R.success(new UserDO());
+  }
+
+  @Override
+  public R updateUserInfo(UserVo userVo) {
+
+    return R.success("修改成功",null);
   }
 }

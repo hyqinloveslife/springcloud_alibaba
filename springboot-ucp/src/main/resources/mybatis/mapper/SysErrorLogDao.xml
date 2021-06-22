@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hyqin.dao.SysErrorLogDao">
+  <resultMap id="BaseResultMap" type="com.hyqin.entity.SysErrorLog">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sno" jdbcType="VARCHAR" property="sno" />
+    <result column="server_ip" jdbcType="VARCHAR" property="serverIp" />
+    <result column="stack_trace" jdbcType="VARCHAR" property="stackTrace" />
+    <result column="exception_name" jdbcType="VARCHAR" property="exceptionName" />
+    <result column="err_no" jdbcType="VARCHAR" property="errNo" />
+    <result column="err_msg" jdbcType="VARCHAR" property="errMsg" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="created_by" jdbcType="BIGINT" property="createdBy" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_by" jdbcType="BIGINT" property="updatedBy" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, sno, server_ip, stack_trace, exception_name, err_no, err_msg, url, created_by, 
+    created_time, updated_by, updated_time, is_deleted, `status`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_error_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_error_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hyqin.entity.SysErrorLog">
+    insert into sys_error_log (id, sno, server_ip, 
+      stack_trace, exception_name, err_no, 
+      err_msg, url, created_by, 
+      created_time, updated_by, updated_time, 
+      is_deleted, `status`)
+    values (#{id,jdbcType=BIGINT}, #{sno,jdbcType=VARCHAR}, #{serverIp,jdbcType=VARCHAR}, 
+      #{stackTrace,jdbcType=VARCHAR}, #{exceptionName,jdbcType=VARCHAR}, #{errNo,jdbcType=VARCHAR}, 
+      #{errMsg,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{createdBy,jdbcType=BIGINT}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=BIGINT}, #{updatedTime,jdbcType=TIMESTAMP}, 
+      #{isDeleted,jdbcType=TINYINT}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hyqin.entity.SysErrorLog">
+    insert into sys_error_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="sno != null">
+        sno,
+      </if>
+      <if test="serverIp != null">
+        server_ip,
+      </if>
+      <if test="stackTrace != null">
+        stack_trace,
+      </if>
+      <if test="exceptionName != null">
+        exception_name,
+      </if>
+      <if test="errNo != null">
+        err_no,
+      </if>
+      <if test="errMsg != null">
+        err_msg,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="updatedBy != null">
+        updated_by,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="sno != null">
+        #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="serverIp != null">
+        #{serverIp,jdbcType=VARCHAR},
+      </if>
+      <if test="stackTrace != null">
+        #{stackTrace,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionName != null">
+        #{exceptionName,jdbcType=VARCHAR},
+      </if>
+      <if test="errNo != null">
+        #{errNo,jdbcType=VARCHAR},
+      </if>
+      <if test="errMsg != null">
+        #{errMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hyqin.entity.SysErrorLog">
+    update sys_error_log
+    <set>
+      <if test="sno != null">
+        sno = #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="serverIp != null">
+        server_ip = #{serverIp,jdbcType=VARCHAR},
+      </if>
+      <if test="stackTrace != null">
+        stack_trace = #{stackTrace,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionName != null">
+        exception_name = #{exceptionName,jdbcType=VARCHAR},
+      </if>
+      <if test="errNo != null">
+        err_no = #{errNo,jdbcType=VARCHAR},
+      </if>
+      <if test="errMsg != null">
+        err_msg = #{errMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        updated_by = #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="updatedTime != null">
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hyqin.entity.SysErrorLog">
+    update sys_error_log
+    set sno = #{sno,jdbcType=VARCHAR},
+      server_ip = #{serverIp,jdbcType=VARCHAR},
+      stack_trace = #{stackTrace,jdbcType=VARCHAR},
+      exception_name = #{exceptionName,jdbcType=VARCHAR},
+      err_no = #{errNo,jdbcType=VARCHAR},
+      err_msg = #{errMsg,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      updated_by = #{updatedBy,jdbcType=BIGINT},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      `status` = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

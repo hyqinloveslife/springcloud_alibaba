@@ -45,6 +45,25 @@ public class Swagger2Config {
         .enable(enable);
   }
 
+  /**
+   * @Desc :
+   * @Author : huangyeqin
+   * @Date : 2021/6/22 18:01
+   * @Param :
+   * @Result : springfox.documentation.spring.web.plugins.Docket
+  **/
+  @Bean
+  public Docket restApiSystem() {
+    return new Docket(DocumentationType.SWAGGER_2)
+            .groupName("系统管理接口")
+            .apiInfo(apiInfo())
+            .select()
+            .apis(RequestHandlerSelectors.withClassAnnotation(Api_System.class))
+            .paths(PathSelectors.any())
+            .build()
+            .enable(enable);
+  }
+
   private ApiInfo apiInfo() {
     return new ApiInfoBuilder()
         .title("业务分组接口")

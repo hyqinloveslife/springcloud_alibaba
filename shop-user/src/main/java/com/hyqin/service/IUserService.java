@@ -13,4 +13,8 @@ import java.util.List;
 public interface IUserService {
 
   List<UserDO> query(UserVo userVo);
+
+  R<UserDO> getUserInfo();
+
+  R updateUserInfo(UserVo userVo);
 }

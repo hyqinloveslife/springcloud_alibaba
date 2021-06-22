@@ -13,7 +13,7 @@ spring:
 
   sa-token:
     # token名称 (同时也是cookie名称)
-    token-name: satoken
+    token-name: token
     # token有效期，单位s 默认30天, -1代表永不过期
     timeout: 2592000
     # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
@@ -47,3 +47,9 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+security:
+  type: hsa-sso
+  oauth2:
+    client:
+      permits: /test,/user/web/sys/do-login,/user/web/sys/do-sign

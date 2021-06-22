@@ -9,27 +9,59 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>8</source>
+          <target>8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
   <groupId>com.hyqin</groupId>
   <artifactId>springboot-ucp</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <dependencies>
-    <!--<dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-oauth2</artifactId>
-      <version>2.0.2.RELEASE</version>
+      <groupId>com.hyqin</groupId>
+      <artifactId>shop-common</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
 
+    <!-- 引入数据库连接池 -->
     <dependency>
-      <groupId>org.springframework.security.oauth.boot</groupId>
-      <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-      <version>2.0.9.RELEASE</version>
-    </dependency>-->
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.1.6</version>
+    </dependency>
+
+    <!-- Spring Boot JDBC -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jdbc</artifactId>
+    </dependency>
+
+<!--    <dependency>-->
+<!--      <groupId>org.springframework.cloud</groupId>-->
+<!--      <artifactId>spring-cloud-starter-oauth2</artifactId>-->
+<!--      <version>2.0.2.RELEASE</version>-->
+<!--    </dependency>-->
+
+<!--    <dependency>-->
+<!--      <groupId>org.springframework.security.oauth.boot</groupId>-->
+<!--      <artifactId>spring-security-oauth2-autoconfigure</artifactId>-->
+<!--      <version>2.0.9.RELEASE</version>-->
+<!--    </dependency>-->
 
     <dependency>
       <groupId>org.projectlombok</groupId>

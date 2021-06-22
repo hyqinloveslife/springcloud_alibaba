@@ -8,6 +8,9 @@ import com.hyqin.domain.config.R;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @description 定义全局异常
@@ -17,7 +20,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 @ControllerAdvice
 public class GlobalException {
 
+  // 在当前类每个方法进入之前触发的操作
+  @ModelAttribute
+  public void get(HttpServletRequest request){}
+
   // 全局异常拦截
+  @ResponseBody
+  @ExceptionHandler
   public R handlerException(Exception e, HttpServletRequest request, HttpServletResponse response) throws Exception {
     // 打印堆栈信息
     System.out.println(">>>>>>>>>>>>>>>>>打印全局异常>>>>>>>>>>>>>>>>>>>");
@@ -28,7 +37,7 @@ public class GlobalException {
 
     // 这里只针对于几种权限框架的异常
     if (e instanceof NotLoginException){  // 未登录异常
-      json.setMessage("未登录 ");
+      json.setMessage("调用非白名单，且无法获取用户信息! ");
     }else if (e instanceof NotRoleException){  // 角色异常
       json.setMessage("找不到该角色");
     }else if (e instanceof NotPermissionException){  // 没有权限异常

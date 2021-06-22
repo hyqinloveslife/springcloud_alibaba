@@ -1,8 +1,8 @@
 package com.hyqin.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.hyqin.domain.config.R;
 import com.hyqin.service.ILoginService;
-import com.hyqin.service.IUserService;
 import com.hyqin.vo.UserVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,4 +35,18 @@ public class LoginController {
   public R doLogin(@RequestBody UserVo userVo){
     return loginService.doLogin(userVo);
   }
+
+  @ApiOperation("用户登出")
+  @PostMapping(value = "/login-out")
+  public R doLoginOut(@RequestBody UserVo userVo){
+    StpUtil.logout();
+    return R.success("成功",null);
+  }
+
+  @ApiOperation("用户注册")
+  @PostMapping(value = "/sign-in")
+  public R doSignIn(@RequestBody UserVo userVo){
+    return null;
+  }
+
 }
