@@ -21,7 +21,7 @@ import java.util.List;
  * @create : 2021/6/21  16:04
  */
 @Api(tags = "系统管理-权限管理")
-@RequestMapping("/sys-role")
+@RequestMapping("/sys/role")
 @Api_System
 @RestController
 public class SysRoleController {

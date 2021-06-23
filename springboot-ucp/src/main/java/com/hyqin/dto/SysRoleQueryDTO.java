@@ -20,4 +20,11 @@ public class SysRoleQueryDTO extends BaseDTO {
      * 创建-结束时间
      */
     private Date createTimeEnd;
+
+    /**
+     * 权限名
+     */
+    private String roleName;
+
+
 }

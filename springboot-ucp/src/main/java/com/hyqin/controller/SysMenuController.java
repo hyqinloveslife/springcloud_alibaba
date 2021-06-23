@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Api_System
 @Api(tags = "系统管理-菜单管理")
-@RequestMapping("/sys-menu")
+@RequestMapping("/sys/menu")
 @RestController
 public class SysMenuController {
 
@@ -41,6 +41,13 @@ public class SysMenuController {
     public R save(@RequestBody SysMenu saveDTO) {
         int result = sysMenuDao.insertSelective(saveDTO);
         return result == 0 ? R.error("保存失败") : R.success("保存成功");
+    }
+
+    @ApiOperation("更新菜单资源")
+    @PostMapping("/update-menu")
+    public R update(@RequestBody SysMenu updateDTO) {
+        int result = sysMenuDao.updateByPrimaryKeySelective(updateDTO);
+        return result == 0 ? R.error("更新失败") : R.success("更新成功");
     }
 
 }

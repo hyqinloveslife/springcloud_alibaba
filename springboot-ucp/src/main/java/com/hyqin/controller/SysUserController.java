@@ -26,7 +26,7 @@ import java.util.List;
  */
 @Api(tags = "系统管理-用户信息管理")
 @Api_System
-@RequestMapping("/sys-user")
+@RequestMapping("/sys/user")
 @RestController
 public class SysUserController {
 

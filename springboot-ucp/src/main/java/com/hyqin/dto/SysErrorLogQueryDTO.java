@@ -7,10 +7,10 @@ import java.util.Date;
 /**
  * @description
  * @author: huangyeqin
- * @create : 2021/6/22  19:09
+ * @create : 2021/6/23  10:18
  */
 @Data
-public class SysMenuQueryDTO extends BaseDTO {
+public class SysErrorLogQueryDTO extends BaseDTO {
     /**
      * 创建时间
      */
@@ -22,12 +22,12 @@ public class SysMenuQueryDTO extends BaseDTO {
     private Date createTimeEnd;
 
     /**
-     * 菜单名
+     * 序列号
      */
-    private String name;
+    private String sno;
 
     /**
-     * 菜单路径
+     * 异常编号
      */
-    private String url;
+    private String errNo;
 }
