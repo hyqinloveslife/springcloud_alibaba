@@ -22,14 +22,14 @@ public class RequestUrlInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        log.info(">>>>>请求开始--Url : {}", request.getRequestURI());
+        log.info(">>>>>请求开始--Url : {} >>>>>>>", request.getRequestURI());
         startTime = System.currentTimeMillis();
         return true;
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        log.info(">>>>>请求结束");
+        log.info(">>>>>请求结束>>>>>>");
         RequestWrapper requestWrapper = new RequestWrapper(request);
         SysLogUtil.saveLog(request, ex, requestWrapper.getBody(), (System.currentTimeMillis() - startTime));
         if (ex != null) {
