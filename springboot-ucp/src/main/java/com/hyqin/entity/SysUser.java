@@ -3,6 +3,7 @@ package com.hyqin.entity;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
+import org.apache.ibatis.annotations.Options;
 
 /**
  * sys_user
@@ -10,6 +11,7 @@ import lombok.Data;
  */
 @Data
 public class SysUser implements Serializable {
+
     private Long id;
 
     /**

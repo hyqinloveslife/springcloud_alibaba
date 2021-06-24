@@ -22,6 +22,11 @@ spring:
           order: 0
           predicates:
             - Path=/user/**
+        - id: ucp
+          uri: http://localhost:9001
+          order: 0
+          predicates:
+            - Path=/ucp/**
     circuitbreaker:
       hystrix:
         enabled: true

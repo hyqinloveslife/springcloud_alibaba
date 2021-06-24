@@ -1,8 +1,9 @@
 package com.hyqin.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.hyqin.entity.SysUserToken;
 
-public interface SysUserTokenDao {
+public interface SysUserTokenDao extends BaseMapper<SysUserToken> {
     int deleteByPrimaryKey(Long userId);
 
     int insert(SysUserToken record);
