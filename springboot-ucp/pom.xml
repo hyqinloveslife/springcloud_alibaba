@@ -51,6 +51,12 @@
       <artifactId>spring-boot-starter-jdbc</artifactId>
     </dependency>
 
+    <!--引入mongodb的starter-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-mongodb</artifactId>
+    </dependency>
+
 <!--    <dependency>-->
 <!--      <groupId>org.springframework.cloud</groupId>-->
 <!--      <artifactId>spring-cloud-starter-oauth2</artifactId>-->
@@ -66,6 +72,20 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
+    </dependency>
+
+
+    <!--测试-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+<!--      <exclusions>-->
+<!--        <exclusion>-->
+<!--          <groupId>org.junit.vintage</groupId>-->
+<!--          <artifactId>junit-vintage-engine</artifactId>-->
+<!--        </exclusion>-->
+<!--      </exclusions>-->
     </dependency>
 
   </dependencies>
