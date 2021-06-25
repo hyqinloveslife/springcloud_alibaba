@@ -30,4 +30,14 @@ public class SysMenuQueryDTO extends BaseDTO {
      * 菜单路径
      */
     private String url;
+
+    /**
+     * 菜单id
+     */
+    private Long id;
+
+    /**
+     * 菜单类型
+     */
+    private String type;
 }

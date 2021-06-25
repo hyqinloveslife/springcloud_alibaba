@@ -40,6 +40,9 @@
             <if test="url != null and url != ''">
                 and url like '%'+#{url}+'%'
             </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
         </where>
     </select>
 
