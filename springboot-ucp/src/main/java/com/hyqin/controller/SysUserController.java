@@ -1,13 +1,10 @@
 package com.hyqin.controller;
 
-import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
-import com.baomidou.mybatisplus.core.toolkit.EncryptUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.base.Strings;
-import com.hyqin.config.Api_Business;
 import com.hyqin.config.Api_System;
 import com.hyqin.dao.SysUserDao;
 import com.hyqin.dao.SysUserRoleDao;
@@ -21,7 +18,6 @@ import com.hyqin.entity.SysUserToken;
 import com.hyqin.util.EncryptedUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

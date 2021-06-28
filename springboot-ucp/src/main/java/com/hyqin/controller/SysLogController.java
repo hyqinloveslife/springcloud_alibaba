@@ -8,7 +8,6 @@ import com.hyqin.config.Api_System;
 import com.hyqin.dao.SysErrorLogDao;
 import com.hyqin.dao.SysLogDao;
 import com.hyqin.domain.config.R;
-import com.hyqin.dto.BaseDTO;
 import com.hyqin.dto.SysErrorLogDTO;
 import com.hyqin.dto.SysErrorLogQueryDTO;
 import com.hyqin.dto.SysLogQueryDTO;
