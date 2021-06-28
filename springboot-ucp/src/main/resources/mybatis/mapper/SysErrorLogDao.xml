@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hyqin.dao.SysErrorLogDao">
   <resultMap id="BaseResultMap" type="com.hyqin.entity.SysErrorLog">
-    <id column="id" jdbcType="BIGINT" property="id" />
+    <id column="log_id" jdbcType="BIGINT" property="logId" />
     <result column="sno" jdbcType="VARCHAR" property="sno" />
     <result column="server_ip" jdbcType="VARCHAR" property="serverIp" />
     <result column="stack_trace" jdbcType="VARCHAR" property="stackTrace" />
@@ -18,26 +18,26 @@
     <result column="status" jdbcType="TINYINT" property="status" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, sno, server_ip, stack_trace, exception_name, err_no, err_msg, url, created_by, 
+    log_id, sno, server_ip, stack_trace, exception_name, err_no, err_msg, url, created_by,
     created_time, updated_by, updated_time, is_deleted, `status`
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_error_log
-    where id = #{id,jdbcType=BIGINT}
+    where log_id = #{logId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sys_error_log
-    where id = #{id,jdbcType=BIGINT}
+    where log_id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.hyqin.entity.SysErrorLog">
-    insert into sys_error_log (id, sno, server_ip, 
+    insert into sys_error_log (log_id, sno, server_ip,
       stack_trace, exception_name, err_no, 
       err_msg, url, created_by, 
       created_time, updated_by, updated_time, 
       is_deleted, `status`)
-    values (#{id,jdbcType=BIGINT}, #{sno,jdbcType=VARCHAR}, #{serverIp,jdbcType=VARCHAR}, 
+    values (#{logId,jdbcType=BIGINT}, #{sno,jdbcType=VARCHAR}, #{serverIp,jdbcType=VARCHAR},
       #{stackTrace,jdbcType=VARCHAR}, #{exceptionName,jdbcType=VARCHAR}, #{errNo,jdbcType=VARCHAR}, 
       #{errMsg,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{createdBy,jdbcType=BIGINT}, 
       #{createdTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=BIGINT}, #{updatedTime,jdbcType=TIMESTAMP}, 
@@ -46,8 +46,8 @@
   <insert id="insertSelective" parameterType="com.hyqin.entity.SysErrorLog">
     insert into sys_error_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="logId != null">
+        log_id,
       </if>
       <if test="sno != null">
         sno,
@@ -90,8 +90,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
+      <if test="logId != null">
+        #{logId,jdbcType=BIGINT},
       </if>
       <if test="sno != null">
         #{sno,jdbcType=VARCHAR},
@@ -177,7 +177,7 @@
         `status` = #{status,jdbcType=TINYINT},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where log_id = #{logId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hyqin.entity.SysErrorLog">
     update sys_error_log
@@ -194,6 +194,6 @@
       updated_time = #{updatedTime,jdbcType=TIMESTAMP},
       is_deleted = #{isDeleted,jdbcType=TINYINT},
       `status` = #{status,jdbcType=TINYINT}
-    where id = #{id,jdbcType=BIGINT}
+    where log_id = #{logId,jdbcType=BIGINT}
   </update>
 </mapper>

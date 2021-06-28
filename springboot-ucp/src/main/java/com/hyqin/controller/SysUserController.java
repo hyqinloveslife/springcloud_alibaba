@@ -62,7 +62,7 @@ public class SysUserController extends BaseController {
     @PostMapping("/list-user-page")
     public R listUserPage(@RequestBody SysUserQueryDTO queryDTO) {
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
-
+        int i = 100/0;
         queryWrapper.lambda().orderByDesc(SysUser::getCreatedTime);
         IPage<SysUser> page = sysUserDao.selectPage(new Page<>(queryDTO.getPageNum(), queryDTO.getPageSize()),
                 queryWrapper);

@@ -6,6 +6,7 @@ import com.hyqin.dao.SysErrorLogDao;
 import com.hyqin.dao.SysLogDao;
 import com.hyqin.entity.SysErrorLog;
 import com.hyqin.entity.SysLog;
+import com.hyqin.enums.MongoDBEnum;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -23,6 +24,8 @@ public class SysLogUtil {
     private static SysLogDao sysLogDao = SpringUtil.getApplicationContext().getBean(SysLogDao.class);
 
     private static SysErrorLogDao errorLogDao = SpringUtil.getApplicationContext().getBean(SysErrorLogDao.class);
+
+    private static MongoDBHelper mongoDBHelper = SpringUtil.getApplicationContext().getBean(MongoDBHelper.class);
 
     /**
      * @Desc : 保存基本操作日志
@@ -72,6 +75,9 @@ public class SysLogUtil {
         sysErrorLog.setUrl(request.getRequestURL().toString());
 
         int result = errorLogDao.insertSelective(sysErrorLog);
+
+        mongoDBHelper.save(sysErrorLog, MongoDBEnum.sys_error_log.name());
+
         Assert.isTrue(result == 1, "保存系统异常日志失败");
     }
 

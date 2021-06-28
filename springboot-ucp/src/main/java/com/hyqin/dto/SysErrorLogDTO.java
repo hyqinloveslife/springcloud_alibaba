@@ -1,22 +1,23 @@
-package com.hyqin.entity;
-
-import java.io.Serializable;
-import java.util.Date;
+package com.hyqin.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
+
+
 /**
- * sys_error_log
- * @author 
+ * @description
+ * @author: huangyeqin
+ * @create : 2021/6/28  20:09
  */
 @Data
-public class SysErrorLog implements Serializable {
-    /**
-     * 主键
-     */
-    private Long logId;
+public class SysErrorLogDTO {
+
+    private ObjectId _id;
 
     /**
      * 序列号
@@ -86,6 +87,4 @@ public class SysErrorLog implements Serializable {
      * 状态
      */
     private Byte status;
-
-    private static final long serialVersionUID = 1L;
 }
