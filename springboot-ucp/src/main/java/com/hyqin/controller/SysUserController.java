@@ -10,10 +10,13 @@ import com.google.common.base.Strings;
 import com.hyqin.config.Api_Business;
 import com.hyqin.config.Api_System;
 import com.hyqin.dao.SysUserDao;
+import com.hyqin.dao.SysUserRoleDao;
 import com.hyqin.dao.SysUserTokenDao;
 import com.hyqin.domain.config.R;
 import com.hyqin.dto.SysUserQueryDTO;
+import com.hyqin.dto.SysUserRoleSaveDTO;
 import com.hyqin.entity.SysUser;
+import com.hyqin.entity.SysUserRole;
 import com.hyqin.entity.SysUserToken;
 import com.hyqin.util.EncryptedUtil;
 import io.swagger.annotations.Api;
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @description 用户信息
@@ -40,6 +44,9 @@ public class SysUserController extends BaseController {
 
     @Resource
     private SysUserTokenDao userTokenDao;
+
+    @Resource
+    private SysUserRoleDao userRoleDao;
 
     @ApiOperation("查询用户信息")
     @PostMapping("/list-user")
@@ -103,9 +110,51 @@ public class SysUserController extends BaseController {
         updateUser.setUpdatedBy(1L);
         int result = sysUserDao.updateByPrimaryKeySelective(updateUser);
         if (result == 0) {
-            return R.error("修改失败",null);
+            return R.error("修改失败", null);
         }
-        return R.success("修改成功",null);
+        return R.success("修改成功", null);
+    }
+
+    @ApiOperation("删除用户信息-物理删除")
+    @PostMapping("/delete-user")
+    public R deleteUser(@RequestBody SysUser deleteUser) {
+        // 删除用户对应的角色
+        QueryWrapper<SysUserRole> deleteWrapper = new QueryWrapper<>();
+        deleteWrapper.lambda().eq(SysUserRole::getUserId, deleteUser.getId());
+        userRoleDao.delete(deleteWrapper);
+
+        // 删除用户
+        int result = sysUserDao.deleteByPrimaryKey(deleteUser.getId());
+        return result == 1 ? R.success("删除成功", null) : R.error("删除失败", null);
+    }
+
+    @ApiOperation("获取用户对应的角色信息")
+    @PostMapping("/user-roles")
+    public R getUserRoles(@RequestBody SysUserRoleSaveDTO queryDTO) {
+        QueryWrapper<SysUserRole> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(SysUserRole::getUserId, queryDTO.getUserId());
+        List<SysUserRole> sysUserRoles = userRoleDao.selectList(queryWrapper);
+        List<Long> roleIds = sysUserRoles.stream().map(e -> e.getRoleId()).collect(Collectors.toList());
+        return R.success(roleIds);
+    }
+
+    @ApiOperation("保存用户的角色")
+    @PostMapping("/save-user-role")
+    public R saveUserRole(@RequestBody SysUserRoleSaveDTO saveDTO) {
+        QueryWrapper<SysUserRole> deleteWrapper = new QueryWrapper<>();
+        deleteWrapper.lambda().eq(SysUserRole::getUserId, saveDTO.getUserId());
+        userRoleDao.delete(deleteWrapper);
+
+        List<SysUserRole> list = new ArrayList<>();
+        for (Long roleId : saveDTO.getRoleId()) {
+            SysUserRole sysUserRole = new SysUserRole();
+            sysUserRole.setUserId(saveDTO.getUserId());
+            sysUserRole.setRoleId(roleId);
+            list.add(sysUserRole);
+        }
+        userRoleDao.insertBatch(list);
+
+        return R.success("保存成功", null);
     }
 
     @ApiOperation("根据token查询用户信息")
