@@ -1,8 +1,11 @@
 package com.hyqin.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.hyqin.entity.SysRoleMenu;
 
-public interface SysRoleMenuDao {
+import java.util.List;
+
+public interface SysRoleMenuDao extends BaseMapper<SysRoleMenu> {
     int deleteByPrimaryKey(Long id);
 
     int insert(SysRoleMenu record);
@@ -14,4 +17,6 @@ public interface SysRoleMenuDao {
     int updateByPrimaryKeySelective(SysRoleMenu record);
 
     int updateByPrimaryKey(SysRoleMenu record);
+
+    int insertBatch(List<SysRoleMenu> roleMenus);
 }
