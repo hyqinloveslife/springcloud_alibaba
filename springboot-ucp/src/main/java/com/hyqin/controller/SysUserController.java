@@ -104,8 +104,6 @@ public class SysUserController extends BaseController {
     @ApiOperation("修改用户信息")
     @PostMapping("/update-user")
     public R update(@RequestBody SysUser updateUser) {
-        updateUser.setPassword(EncryptedUtil.MD5WithSalt(updateUser.getPassword() + EncryptedUtil.getSalt()));
-        updateUser.setSalt(EncryptedUtil.getSalt());
         updateUser.setUpdatedTime(new Date());
         updateUser.setUpdatedBy(1L);
         int result = sysUserDao.updateByPrimaryKeySelective(updateUser);
@@ -155,6 +153,19 @@ public class SysUserController extends BaseController {
         userRoleDao.insertBatch(list);
 
         return R.success("保存成功", null);
+    }
+
+    @ApiOperation("修改密码")
+    @PostMapping("/modify-password")
+    public R modifyPassword(@RequestBody SysUser updateUser){
+        String salt = EncryptedUtil.getSalt();
+        updateUser.setPassword(EncryptedUtil.MD5WithoutSalt(updateUser.getPassword()+salt));
+        updateUser.setSalt(salt);
+        int result = sysUserDao.updateByPrimaryKeySelective(updateUser);
+        if (result == 0) {
+            return R.error("修改失败", null);
+        }
+        return R.success("修改成功",null);
     }
 
     @ApiOperation("根据token查询用户信息")

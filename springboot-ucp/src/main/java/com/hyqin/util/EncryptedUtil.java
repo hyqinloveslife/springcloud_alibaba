@@ -58,9 +58,9 @@ public class EncryptedUtil {
      * @Param : password
      * @param: salt
      * @Result : java.lang.String
-    **/
+     **/
     private static String generate(String password, String salt) {
-        return DigestUtil.md5Hex(password + salt);
+        return DigestUtil.md5Hex(password + (salt == null ? "" : salt));
     }
 
     /**
@@ -69,7 +69,7 @@ public class EncryptedUtil {
      * @Date : 2021/6/24 14:47
      * @Param :
      * @Result : java.lang.String
-    **/
+     **/
     public static String generateDefaultPassword() {
         return getRandomStr(6) + defaultPasswordSuffix;
     }
@@ -80,7 +80,7 @@ public class EncryptedUtil {
      * @Date : 2021/6/24 14:48
      * @Param : capacity
      * @Result : java.lang.String
-    **/
+     **/
     public static String getRandomStr(int capacity) {
         Random random = new Random();
         StringBuilder sb = new StringBuilder(capacity);

@@ -8,12 +8,11 @@ import com.hyqin.domain.config.R;
 import com.hyqin.dto.SysLoginDTO;
 import com.hyqin.entity.SysUser;
 import com.hyqin.entity.SysUserToken;
+import com.hyqin.util.EncryptedUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Objects;
@@ -23,6 +22,7 @@ import java.util.Objects;
  * @author: huangyeqin
  * @create : 2021/6/24  9:42
  */
+@Slf4j
 @Api(tags = "系统管理-登录")
 @Api_System
 @RequestMapping("/sys")
@@ -40,23 +40,29 @@ public class SysLoginController extends BaseController {
     public R loginHandler(@RequestBody SysLoginDTO loginDTO) {
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(SysUser::getUsername, loginDTO.getUsername());
-        queryWrapper.lambda().eq(SysUser::getPassword, loginDTO.getPassword());
         SysUser sysUser = sysUserDao.selectOne(queryWrapper);
         if (Objects.isNull(sysUser)) {
-            return R.error("登录失败");
+            return R.error("账号不存在", null);
         }
+        String salt = sysUser.getSalt();
+        String password = sysUser.getPassword();
+        String inputPassword = EncryptedUtil.MD5WithoutSalt(loginDTO.getPassword() + salt);
+        if (!inputPassword.equalsIgnoreCase(password)) {
+            return R.error("密码错误", null);
+        }
+        //queryWrapper.lambda().eq(SysUser::getPassword, loginDTO.getPassword());
 
         // 获取token
         SysUserToken sysUserToken = userTokenDao.selectByPrimaryKey(sysUser.getId());
         if (Objects.isNull(sysUserToken)) {
-            return R.error("当前用户未注册");
+            return R.error("当前用户未注册", null);
         }
         return R.success("登录成功", sysUserToken);
     }
 
     @ApiOperation("注册")
     @PostMapping("/sys/sign")
-    public R signInHandler(@RequestBody SysUser saveUser){
+    public R signInHandler(@RequestBody SysUser saveUser) {
         // 1、保存到人员信息表
 
         // 2、保存token到redis
@@ -65,12 +71,12 @@ public class SysLoginController extends BaseController {
     }
 
     @ApiOperation("登出")
-    @PostMapping("/logout")
-    public R signOutHandler(@RequestBody SysUser saveUser){
+    @GetMapping("/logout")
+    public R signOutHandler(@RequestParam("token") String token) {
         // 1、保存到人员信息表
-
+        log.info(">>>>>>>登出{}>>>>>>",token);
         // 2、保存token到redis
 
-        return R.success("注销成功");
+        return R.success("注销成功", null);
     }
 }
