@@ -26,5 +26,9 @@ public class SysRoleQueryDTO extends BaseDTO {
      */
     private String roleName;
 
+    /**
+     * 权限编码
+     */
+    private String roleCode;
 
 }

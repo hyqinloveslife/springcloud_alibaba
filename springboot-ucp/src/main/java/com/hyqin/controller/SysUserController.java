@@ -3,6 +3,7 @@ package com.hyqin.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.base.Strings;
 import com.hyqin.config.Api_System;
@@ -58,7 +59,10 @@ public class SysUserController extends BaseController {
     @PostMapping("/list-user-page")
     public R listUserPage(@RequestBody SysUserQueryDTO queryDTO) {
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
-        int i = 100/0;
+        queryWrapper.lambda().eq(StringUtils.isNotBlank(queryDTO.getUsername()), SysUser::getUsername, queryDTO.getUsername());
+        queryWrapper.lambda().like(StringUtils.isNotBlank(queryDTO.getRealName()), SysUser::getRealName, queryDTO.getRealName());
+        queryWrapper.lambda().eq(StringUtils.isNotBlank(queryDTO.getIdCard()), SysUser::getIdCard, queryDTO.getIdCard());
+        queryWrapper.lambda().eq(StringUtils.isNotBlank(queryDTO.getMobile()), SysUser::getMobile, queryDTO.getMobile());
         queryWrapper.lambda().orderByDesc(SysUser::getCreatedTime);
         IPage<SysUser> page = sysUserDao.selectPage(new Page<>(queryDTO.getPageNum(), queryDTO.getPageSize()),
                 queryWrapper);

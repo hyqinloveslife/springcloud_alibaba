@@ -48,6 +48,7 @@ public class SysRoleController {
     @PostMapping("/list-role-page")
     public R listPage(@RequestBody SysRoleQueryDTO queryDTO) {
         QueryWrapper<SysRole> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(StringUtils.isNotBlank(queryDTO.getRoleCode()),SysRole::getRoleCode,queryDTO.getRoleCode());
         queryWrapper.lambda().like(StringUtils.isNotBlank(queryDTO.getRoleName()), SysRole::getRoleName
                                                         , queryDTO.getRoleName());
         queryWrapper.lambda().orderByDesc(SysRole::getCreatedTime);

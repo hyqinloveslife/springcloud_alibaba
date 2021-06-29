@@ -19,6 +19,10 @@ public class RequestConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(requestUrlInterceptor).addPathPatterns("/sys/**");
+        // 拦截规则  所有的系统管理，但是不拦截查询操作日志
+        registry.addInterceptor(requestUrlInterceptor).addPathPatterns("/sys/**")
+                .excludePathPatterns("/sys/log/list-log-page")
+                .excludePathPatterns("/sys/user/info")
+                .excludePathPatterns("/sys/log/list-error-log");
     }
 }
