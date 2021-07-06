@@ -3,6 +3,7 @@ server:
   servlet:
     context-path: /ucp
 
+
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -16,8 +17,6 @@ spring:
       uri: mongodb://127.0.0.1:27017
       username:
       password:
-  profiles:
-    active: ali
 
 ## 配置控制台打印SQL日志
 mybatis-plus:

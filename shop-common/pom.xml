@@ -23,6 +23,8 @@
     </plugins>
   </build>
 
+  <packaging>jar</packaging>
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>

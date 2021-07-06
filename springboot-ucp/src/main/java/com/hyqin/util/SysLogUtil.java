@@ -61,7 +61,7 @@ public class SysLogUtil {
      * @param: errCode
      * @param: errMsg
      * @Result : void
-    **/
+     **/
     public static void saveErrorLog(HttpServletRequest request, Exception t, String traceId, String errCode, String errMsg) {
         SysErrorLog sysErrorLog = new SysErrorLog();
         sysErrorLog.setCreatedTime(new Date());
@@ -87,10 +87,10 @@ public class SysLogUtil {
      * @Date : 2021/6/23 10:02
      * @Param : t
      * @Result : java.lang.String
-    **/
-    private static String getStackTrace(Throwable t){
+     **/
+    private static String getStackTrace(Throwable t) {
         StringWriter sw = new StringWriter();
-        try (PrintWriter pw = new PrintWriter(sw)){
+        try (PrintWriter pw = new PrintWriter(sw)) {
             t.printStackTrace(pw);
             return sw.toString();
         }

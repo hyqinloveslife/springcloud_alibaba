@@ -11,6 +11,10 @@
 
   <artifactId>shop-comment</artifactId>
 
+  <properties>
+    <elasticsearch.version>6.6.2</elasticsearch.version>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -54,6 +58,18 @@
       <artifactId>fastjson</artifactId>
       <version>1.2.47</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.elasticsearch.client</groupId>
+      <artifactId>elasticsearch-rest-client</artifactId>
+      <version>${elasticsearch.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.elasticsearch.client</groupId>
+      <artifactId>elasticsearch-rest-high-level-client</artifactId>
+      <version>${elasticsearch.version}</version>
+    </dependency>
+
 
   </dependencies>
 
